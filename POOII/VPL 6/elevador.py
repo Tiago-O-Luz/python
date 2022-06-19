@@ -31,32 +31,33 @@ class Elevador(AbstractElevador):
 
     @totalAndaresPredio.setter
     def totalAndaresPredio(self, totalAndaresPredio: int):
-        self.__totalAndaresPredio = totalAndaresPredio
+        if str(totalAndaresPredio).isnumeric() and int(totalAndaresPredio) >= 0:
+            self.__totalAndaresPredio = int(totalAndaresPredio)
 
     def subir(self) -> str:
-        if self.andarAtual == self.totalAndaresPredio:
-            raise ElevadorJahNoUltimoAndarException('')
+        if self.andarAtual+1 == self.totalAndaresPredio:
+            raise ElevadorJahNoUltimoAndarException()
         else:
-            self.andarAtual += 1
+            self.__andarAtual += 1
             return str(self.andarAtual)
 
     def descer(self) -> str:
         if self.andarAtual == 0:
-            raise ElevadorJahNoTerreoException('')
+            raise ElevadorJahNoTerreoException()
         else:
-            self.andarAtual -= 1
+            self.__andarAtual -= 1
             return str(self.andarAtual)
     
     def entraPessoa(self) -> str:
         if self.totalPessoas == self.capacidade:
-            raise ElevadorCheioException('Capacid')
+            raise ElevadorCheioException()
         else:
-            self.totalPessoas += 1
+            self.__totalPessoas += 1
             return str(self.totalPessoas)
 
     def saiPessoa(self) -> str:
         if self.totalPessoas == 0:
             raise ElevadorJahVazioException
         else:
-            self.totalPessoas -=1
+            self.__totalPessoas -=1
             return str(self.totalPessoas)
